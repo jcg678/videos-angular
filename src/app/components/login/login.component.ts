@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user.service';
 import {Observable} from 'rxjs';
+import {Router, ActivatedRoute, Params} from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,10 @@ export class LoginComponent implements OnInit {
   public token: string;
   public identity;
 
-  constructor(private _userService: UserService) {
+  constructor(private _userService: UserService,
+              private _router: Router,
+              private _route: ActivatedRoute
+              ) {
     this.page_title = 'Login';
     this.user = new User(1, '', '', '', '', 'ROLE_USER', '');
   }
@@ -41,6 +46,11 @@ export class LoginComponent implements OnInit {
 
                 this.token = response;
                 console.log(this.token);
+
+                localStorage.setItem('token', this.token);
+                localStorage.setItem('identity', JSON.stringify(this.user));
+
+                this._router.navigate(['/inicio']);
               }
             },
             error => {
