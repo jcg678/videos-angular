@@ -9,6 +9,8 @@ import { ErrorComponent } from './components/error/error.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 
+import {HttpClientModule} from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,8 @@ import { LoginComponent } from './components/login/login.component';
   imports: [
     BrowserModule,
     routing,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
