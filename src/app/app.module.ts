@@ -13,6 +13,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { VideoNewComponent } from './components/video-new/video-new.component';
 
+import {IdentityGuard} from './services/identity.guard';
+import {UserService} from './services/user.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +32,11 @@ import { VideoNewComponent } from './components/video-new/video-new.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [appRoutingProviders],
+  providers: [
+    appRoutingProviders,
+    IdentityGuard,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

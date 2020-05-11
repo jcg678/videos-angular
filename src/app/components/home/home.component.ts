@@ -4,14 +4,15 @@ import {UserService} from '../../services/user.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [UserService]
 })
 export class HomeComponent implements OnInit {
   public page_title: string;
   public identity;
 
   constructor(private _userService: UserService) {
-    this.page_title = 'Inicio';
+    this.page_title = 'Mis videos';
   }
 
   ngOnInit() {
