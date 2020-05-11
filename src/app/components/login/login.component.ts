@@ -28,27 +28,29 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.logout();
   }
 
   onSubmit(form) {
     this._userService.signup(this.user).subscribe(
       response => {
-        this.status = 'success';
+        this.status = 'error';
 
         if (!response.status || response.status != 'error') {
-          this.status = 'success';
+          //this.status = 'success';
           this.identity = response;
           //token
+          console.log(this.identity);
           this._userService.signup(this.user, true).subscribe(
             response => {
-              this.status = 'success';
+
               if (!response.status || response.status != 'error') {
 
                 this.token = response;
                 console.log(this.token);
-
+                this.status = 'success';
                 localStorage.setItem('token', this.token);
-                localStorage.setItem('identity', JSON.stringify(this.user));
+                localStorage.setItem('identity', JSON.stringify(this.identity));
 
                 this._router.navigate(['/inicio']);
               }
@@ -60,7 +62,7 @@ export class LoginComponent implements OnInit {
           );
 
 
-          console.log(this.identity);
+          //console.log(this.identity);
         }
       },
       error => {
@@ -68,6 +70,22 @@ export class LoginComponent implements OnInit {
         console.log('error');
       }
     );
+  }
+
+  logout(){
+    this._route.params.subscribe(params => {
+      let sure = +params['sure'];
+      if(sure === 1) {
+        localStorage.removeItem('identity');
+        localStorage.removeItem('token');
+
+        this.identity = null;
+        this.token = null;
+
+        this._router.navigate(['/inicio']);
+      }
+
+    });
   }
 
 
