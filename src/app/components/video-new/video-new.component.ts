@@ -25,8 +25,11 @@ export class VideoNewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.video = new Video(1,this.identity.sub,'','','','',null,null);
+    this.video = new Video(1, this.identity.id,'','','','',null,null);
   }
 
+  onSubmit(form){
+    console.log(this.video);
+  }
 
 }
