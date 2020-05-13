@@ -18,19 +18,19 @@ export class VideoService {
     const params = 'json=' + json;
     const headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
       .set('Authorization', token);
-    return this._http.post(this.url + 'video/new', params,{ headers : headers });
+    return this._http.post(this.url + 'video/nuevo', params,{ headers : headers });
   }
 
   getVideos(token): Observable<any> {
     const headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
       .set('Authorization', token);
-    return this._http.get(this.url + 'video/list', params,{ headers : headers });
+    return this._http.get(this.url + 'video/list', { headers : headers });
   }
 
   getVideo(token, id): Observable<any> {
     const headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
       .set('Authorization', token);
-    return this._http.get(this.url + 'video/detail/' + id, params,{ headers : headers });
+    return this._http.get(this.url + 'video/detail/' + id, { headers : headers });
   }
 
   update(token, video, id): Observable<any> {
@@ -44,7 +44,7 @@ export class VideoService {
   delete(token, id): Observable<any> {
     const headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
       .set('Authorization', token);
-    return this._http.delete(this.url + 'video/remove/' + id, params,{ headers : headers });
+    return this._http.delete(this.url + 'video/remove/' + id, { headers : headers });
   }
 
 }
