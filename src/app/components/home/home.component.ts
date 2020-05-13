@@ -57,6 +57,17 @@ export class HomeComponent implements OnInit {
             number_pages.push(i);
           }
           this.number_pages = number_pages;
+
+          this.prev_page = 1 ;
+          if (page >= 2) {
+            this.prev_page = page - 1 ;
+          }
+
+          if (page < response.total_pages) {
+            this.next_page = page + 1;
+          } else {
+            this.next_page = response.total_pages;
+          }
           this.status = 'success';
         }
       },
