@@ -7,6 +7,14 @@
         {{ video.title }}
       </div>
       <div class="card-body">
+        <div class="video-image w-100" *ngIf="video.url">
+          <img src="{{getThumb(video.url)}}" class="w-100" />
+        </div>
+
+        <div class="video-image w-100" *ngIf="!video.url">
+          <img src="assets/images/default.png" class="w-100" />
+        </div>
+
         <div class="video-buttons mt-3">
           <a href="#" class="btn btn-success mr-2">Leer</a>
           <a href="#" class="btn btn-warning mr-2">Editar</a>
