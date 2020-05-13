@@ -21,10 +21,13 @@ export class VideoService {
     return this._http.post(this.url + 'video/nuevo', params,{ headers : headers });
   }
 
-  getVideos(token): Observable<any> {
+  getVideos(token, page): Observable<any> {
+    if (!page) {
+      page = 1;
+    }
     const headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
       .set('Authorization', token);
-    return this._http.get(this.url + 'video/listado', { headers : headers });
+    return this._http.get(this.url + 'video/listado?page=' + page, { headers : headers });
   }
 
   getVideo(token, id): Observable<any> {

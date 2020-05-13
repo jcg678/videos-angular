@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { VideoService } from '../../services/video.service';
 import { Video } from '../../models/video';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 
 
 @Component({
@@ -16,20 +17,38 @@ export class HomeComponent implements OnInit {
   public token;
   public status;
   public videos;
+  public page;
+  public next_page;
+  public prev_page;
+  public number_pages;
 
   constructor(private _userService: UserService,
-              private _videoService: VideoService) {
+              private _videoService: VideoService,
+              private _route: ActivatedRoute,
+              private _router: Router
+  ) {
     this.page_title = 'Mis videos';
   }
 
   ngOnInit() {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
-    this.getVideos();
+    this._route.params.subscribe(params => {
+      var page = +params['page'];
+
+      if (!page) {
+        page = 1;
+        this.prev_page = 1;
+        this.next_page = 2;
+      }
+
+      this.getVideos(page);
+    });
+
   }
 
-  getVideos(){
-    this._videoService.getVideos(this.token).subscribe(
+  getVideos(page){
+    this._videoService.getVideos(this.token, page).subscribe(
       response => {
         if (response.status == 'success') {
           this.videos = response.videos;
