@@ -3,6 +3,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 import {UserService} from '../../services/user.service';
 import {Video} from '../../models/video';
 import {VideoService} from '../../services/video.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class VideoDetailComponent implements OnInit {
   constructor(private _userService: UserService,
               private _router: Router,
               private _route: ActivatedRoute,
-              private _videoService: VideoService
+              private _videoService: VideoService,
+              private _sanitizer: DomSanitizer
   ) {
     this.page_title = 'Editar video';
     this.identity = this._userService.getIdentity();
@@ -49,7 +51,18 @@ export class VideoDetailComponent implements OnInit {
           }
         );
       });
-
   }
 
+
+  getVideoIframe(url) {
+    var video, results;
+
+    if (url === null) {
+      return '';
+    }
+    results = url.match('[\\?&]v=([^&#]*)');
+    video   = (results === null) ? url : results[1];
+
+    return this._sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + video);
+  }
 }
