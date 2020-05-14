@@ -18,7 +18,37 @@
         <div class="video-buttons mt-3">
           <a href="#" class="btn btn-success mr-2">Leer</a>
           <a href="#" class="btn btn-warning mr-2">Editar</a>
-          <a href="#" class="btn btn-danger mr-2">Borrar</a>
+          <!-- Button to Open the Modal -->
+          <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#borrar'+video.id">
+            Borrar
+          </button>
+
+          <!-- The Modal -->
+          <div class="modal" id="{{'borrar'+video.id}}">
+            <div class="modal-dialog">
+              <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title">¿Estas seguro?</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                  Borrar el video {{video.title}}
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                  <a class="btn btn-danger" (click)="deleteVideo(video.id)" data-dismiss="modal">Borrar</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </article>
