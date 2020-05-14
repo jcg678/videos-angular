@@ -33,7 +33,7 @@ export class VideoService {
   getVideo(token, id): Observable<any> {
     const headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
       .set('Authorization', token);
-    return this._http.get(this.url + 'video/detail/' + id, { headers : headers });
+    return this._http.get(this.url + 'video/detalle/' + id, { headers : headers });
   }
 
   update(token, video, id): Observable<any> {
@@ -41,7 +41,7 @@ export class VideoService {
     const params = 'json=' + json;
     const headers = new HttpHeaders().set('Content-type', 'application/x-www-form-urlencoded')
       .set('Authorization', token);
-    return this._http.post(this.url + 'video/edit/' + id, params,{ headers : headers });
+    return this._http.put(this.url + 'video/edit/' + id, params,{ headers : headers });
   }
 
   delete(token, id): Observable<any> {
